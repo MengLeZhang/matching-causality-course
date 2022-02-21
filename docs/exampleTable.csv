@@ -1,0 +1,7 @@
+,Sex,,Outcome (if in treatment group),Outcome (if not in treatment group),Is actually in treatment group?,Outcome (in real life)
+Liam.,M,,1,0,T,1
+Noah.,M,,1,1,F,1
+Oliver.,M,,0,0,T,0
+Amelia.,F,,1,0,F,0
+Isabella.,F,,0,1,T,0
+Mia.,F,,1,0,F,0
