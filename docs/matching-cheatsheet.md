@@ -65,10 +65,11 @@ This is identifical to differencing the average of the two outcome cols.
 
 - __Intention to Treat (ITT) effect__. The average difference in outcomes for those who were _assigned_ to receive the treatment (regardless of whether they actually were treated). If everyone who was assigned also got the treatment then the __ITT = ATT__. Perfect compliance rarely happens.
 
+## The design: Choosing what $X$ to match on
 
-# Choosing what to match on: $X$ (the research design part of an estimator)
-
-> __"If your experiment needs statistics, you ought to have done a better experiment"__. Ernest Rutherford
+> Whether the context be policy analysis or any other form of empirical research, the logic of inference is summarized by the relationship:
+>   _assumption + data => conclusions_
+> Manski (2010)
 
 __Research design, Identification strategy__ For causal inference, this is what you to get causal estimates. For experimenters, this is your experiment. For non-experimental studies, this is:
 - natural experiment where treatment is randomised (whether intentional or not)
@@ -76,7 +77,26 @@ __Research design, Identification strategy__ For causal inference, this is what 
 
 A common design is: get lots of data (preferably longitudinal), invent a story, and hope for plausbile results. Avoid doing this if you can: it doesn't work as well as you'd think. Ask yourself: is no answer worse than a false answer.
 
+
 __Assumption testing__ Trying to refute the fundamental assumptions of your research design. Don't just do this for reviewers: view this as a series of checks and balances done by you against your own bullshit.
+
+__Directed Acyclic Graph (DAG)__ A picture describing the c
+
+![](assets/markdown-img-paste-20220223131717952.png)
+
+Will adjusting for $X$ give me unbiased estimates of the causal effects of $T$ on $Y$? Check if:
+- $X$ as a common cause (check for $T \leftarrow X \rightarrow Y$)
+- $X$ is __not__ on a pathway where $X \rightarrow X\leftarrow Y$ (i.e. not a collider)
+
+Got to http://www.dagitty.net and use their graph to check all is okay.
+
+__Checklist and questions to ask yourself__
+- Why do I believe that selection into the treatment is random after conditioning on $X$? Is this an assumption of convenience?
+- Are there variables $X_{other}$ that _shouldn't_ affect selection into the treatment? You can use these to check your assumptions.
+- Are there outcomes $Y_{other}$ that shouldn't be affected by the treatment? Best $Y_{other}$ are outcomes that are affected by confounder that may also affect treatment status. The same outcome before any treatment began is an excellent candidate.
+-  Avoid data mining. This means avoid saying that $X_{other}$ _shouldn't_ affect selection _after_ you've seen the results.
+- Always doubt yourself and gather evidence to try to refute your assumptions. Avoid buying into your own hype and fooling yourself.
+- You will fail more times than you succeed; learn and move on. Failure is part of the scientific processs. Nine times out of ten, pursuing research based on poor evidence (e.g. bad assumptions) is a waste of your talent and time.
 
 
 
@@ -84,29 +104,21 @@ __Assumption testing__ Trying to refute the fundamental assumptions of your rese
 
 There's at least two schools of though on matching. We'll cover one: the use of matching as a kind of data cleaning step. The goal of matching is to balance $X$.
 
+## Steps for matching
+From Stuart (2010):
+1. Defining “closeness”: the distance measure used to determine whether one case is a good match for another,
+2. Implementing a matching method, given that measure of closeness,
+3. Assessing the quality of the resulting matched samples, and perhaps iterating with Steps (1) and (2) until well-matched samples result, and
+4. Analysis of the outcome and estimation of the treatment effect, given the matching done in Step (3).
+
+
+## Matching terms
+
 - __Matching variables (usually called $X$)__ These are variables on which you want to do the matching.
 
 - __Balance__ The treatment and control groups are balanced with respect to $X$ if the distribution of $X$ is the same across both group. In the case of a single $X$, check univariate statistics. If there are multiple variable $X_1$, $X_2$ etc, check that the multivariate distributions (e.g. correlation between $X1$ and $X2$) are the same across the treatment and control.
 
 - __Common support__ The treatment and control groups have some overlap in their values of $X$ (or whatever you choose to match on, see next section). For example, if every member of the treatment group has a value of $X$ over 0 and every member of the control group has $X < 0 $ then there is no common support.
-
-
-## Choosing what $X$ to match on
-
-Almost every statistical method has a variation of this assumption: you cannot escape it. This is 90% of what makes a research design work. Don't believe this just because of convenience (i.e. have data now, justify results later); you will regret it.
-
-## Steps for matching
-
-Steps:
-1. Choose your Estimand. For this example, we choose the __ATT__
-2. What are your matching variables $X$. For example, sex.
-3. Pick your matching method. This is like picking a Subway sandwich and there's options:
-- Whats the matching method
-- How do we measure closeness
-- Other misc. options
-4. Check for balance in $X$
-5. Use the matched result in whatever routine you want (e.g. regression models)
-
 
 ## How do we do the matching (method)?
 Option called `method` in `matchit()`.
@@ -177,6 +189,13 @@ thisList$objName ## what we saved
 ````
 
 ## Much better resources for matching and the MatchIt package
+
+
+Excellent reviews:
+
+- Ho, Daniel E., Kosuke Imai, Gary King, and Elizabeth A. Stuart. Nonparametric Preprocessing for Parametric Causal Inference’. Journal of Statistical Software 42, no. 8 (2011). https://doi.org/10.18637/jss.v042.i08.
+
+- Stuart E. A. (2010). Matching methods for causal inference: A review and a look forward. Statistical science : a review journal of the Institute of Mathematical Statistics, 25(1), 1–21. https://doi.org/10.1214/09-STS313
 
 
 

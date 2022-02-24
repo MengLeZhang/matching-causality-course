@@ -1,15 +1,36 @@
 # Part one: Research design
 
-Also known as the identification strategy for economists.
+> The use of matching methods is in the broader context of the careful design of non-experimental studies (Rosenbaum, 1999, 2002; Rubin, 2007). While extensive time and effort is put into the careful design of randomized experiments, relatively little effort is put into the corresponding “design” of non-experimental studies. In fact, precisely because non-experimental studies do not have the benefit of randomization, they require even more careful design. In this spirit of design, we can think of any study aiming to estimate the effect of some intervention as having two key stages: (1) design, and (2) outcome analysis. Stage (1) uses only background information on the individuals in the study, designing the non-experimental study as would be a randomized experiment, without access to the outcome values. Matching methods are a key tool for Stage (1). Only after Stage (1) is finished does Stage (2) begin, comparing the outcomes of the treated and control individuals.
+
+> Stuart E. A. (2010). Matching methods for causal inference: A review and a look forward. Statistical science : a review journal of the Institute of Mathematical Statistics, 25(1), 1–21. https://doi.org/10.1214/09-STS313
+
 
 # Summary
 - What we want to know is if _doing_ a change in _T_ changes _Y_
 - Difference between a structural model/ causal model/ and the techniques we use to estimate those models
-- Concentrating on one type of natural experiment:
-  - What variables do we need
-  - what variables do we not use
-  - how can we check robustness
-- Next steps: Matching as a general all purpose technique for adjusting for confounding
+- Choosing $X$: have we got all we need
+- The NSW data -- one case
+- Example using example matching
+
+
+# What is causality
+
+The word counterfactual and potential outcomes framework will be thrown around a lot. Here's in a nutshell what it means.
+
+
+# What are the different estima
+
+# How good is good enough?
+
+The estimand we are interested in is
+
+# What's a causal model
+
+Introduce DAGs
+Your causal design is how you plan to
+
+# What variables do I need to condition on?
+
 
 
 # What is this course about?
@@ -38,7 +59,7 @@ The history of causality it pretty interesting -- but most of it is largely irre
 
 Imagine one parallel reality where an action _T_ happened and another reality where _T_ did not happen but nothing else was changed. If some time later _Y_ differs across the two worlds, then we would say that _T_ has a causal effect on _Y_. Using our example so far, what would happen if School A got a brand new school building? Would that improve the exam results of its pupils? To answer this, we need to do a thought experiment and imagine a counterfactual world where everything is the same except that School A did get a brand new building. In that counterfactual world, if we observed that exam scores were different then we would say that having a new school building caused changes in exam scores.
 
-We can't directly observe parallel worlds. Howeverm in a bizzare tiwst, we can use the same statistical reasoning behind randomly sampling in surveys to infer what happens in parallel worlds. This reasoning underlies the Neyman-Rubin approach to the statistical analysis of cause and effect. 
+We can't directly observe parallel worlds. Howeverm in a bizzare tiwst, we can use the same statistical reasoning behind randomly sampling in surveys to infer what happens in parallel worlds. This reasoning underlies the Neyman-Rubin approach to the statistical analysis of cause and effect.
 
 ## Randomisation and causality: Experiments are surveys of parallel realities
 
