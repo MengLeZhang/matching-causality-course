@@ -59,7 +59,7 @@ nsw_matchitList[[modelName]] <-
     formula = modelName_form, ## add here
 
     ## Coarsened exact 
-    #  method = 'cem', #uncomment/delete as appropriate
+    method = 'cem', #uncomment/delete as appropriate
     #  discard = 'both', #discard due to lack of common support? treat/control/both/none
     data = myData 
   )

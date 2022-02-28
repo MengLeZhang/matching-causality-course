@@ -67,24 +67,3 @@ print(paste(modelName, 'done: check for errors'))
 
 # example usage -----------------------------------------------------------
 # checkout template02 
-# model1 --------------------------------------------------------------
-
-## Example: exact matching
-modelName <- 'exact1' # insert model name
-modelName_form <- treat ~ married + nodegree # insert model formula
-
-print(paste('Running',modelName))
-matchitList[[modelName]] <-
-  matchit(
-    formula = modelName_form, ## add here
-    
-    # Exact matching options
-      method = 'exact', #uncomment/delete as appropriate
-    data = myData 
-  )
-
-matchitSavedData[[modelName]] <-
-  matchitList[[modelName]] %>%
-  match.data()
-
-print(paste(modelName, 'done: check for errors'))

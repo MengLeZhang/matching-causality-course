@@ -7,7 +7,8 @@ requiredPkgs <-
     'MatchIt',
     'ggplot2',
     'sandwich',
-    'lmtest'
+    'lmtest',
+    'stargazer'
     )
 
 requiredPkgs %in% installed.packages() ## check for FALSE

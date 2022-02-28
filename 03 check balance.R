@@ -24,10 +24,38 @@ checkThisMatchit %>%
 # eCDF and eCDF max = 0 
 
 # visual check 
-
-
+## overall check of diff in standardised means; you want it lines = 0.1 and 0.05 
+## you want within this area
 checkThisMatchit %>%
-  plot
+  summary %>%
+  plot(abs = F)
+
+
+
+## raw data EQQ: for scale data you want a straight line
+checkThisMatchit %>%
+  plot(type = 'qq')
+
+## ecdf: look for same shape
+checkThisMatchit %>%
+  plot(type = 'ecdf')
+
+## Others:
+checkThisMatchit %>%
+  plot(
+    type = 
+      # 'qq'
+      # 'ecdf'
+      # 'density'
+      # 'jitter'
+      'histogram'
+    )
+
+##  love plots to summarise everythin
+checkThisMatchit %>%
+  summary %>%
+  plot(var.order = 'unmatched')
+
 
 ## plots 
 ## eQQ plots -- for scale vars you want a straight line
