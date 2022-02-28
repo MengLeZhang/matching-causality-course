@@ -12,6 +12,20 @@ library(sandwich)
 
 # code --------------------------------------------------------------------
 
+## At this point we can join our data with the outcomes
+nsw_onlyOut <-
+  readRDS('data/makefile01 NSW+controls outcomes only.rds')
+
+## join the data
+nsw_matchitSavedData$exact <-
+  nsw_matchitSavedData$exact  %>% left_join(nsw_onlyOut)
+
+nsw_matchitSavedData$cem <-
+  nsw_matchitSavedData$cem  %>% left_join(nsw_onlyOut)
+
+nsw_matchitSavedData$psm1 <-
+  nsw_matchitSavedData$psm1  %>% left_join(nsw_onlyOut)
+
 
 # simple difference in mean outcomes --------------------------------------
 
@@ -20,10 +34,11 @@ library(sandwich)
 ## ALWAYS use weights
 ## generally you want to include all the matching covariates you used 
 ## Except for exact matching
-## imagine wages in 75 was our outcomes (it's not)
+## wages in 1978 is our outcome
+
 exactFit1 <-
   lm(
-    re75 ~ treat,
+    re78 ~ treat,
     weights = weights,
     data = nsw_matchitSavedData$exact 
     )
@@ -40,7 +55,7 @@ exactCoef1
 # coarsened exact ---------------------------------------------------------
 cemFit1 <-
   lm(
-    re75 ~ treat + age + education + black + hispanic + married + nodegree,
+    re78 ~ treat + age + education + black + hispanic + married + nodegree,
     weights = weights,
     data = nsw_matchitSavedData$cem
   )
@@ -59,7 +74,7 @@ cemCoef1
 # psm ---------------------------------------------------------------------
 psmFit1 <-
   lm(
-    re75 ~ treat + age + education + black + hispanic + married + nodegree,
+    re78 ~ treat + age + education + black + hispanic + married + nodegree,
     weights = weights,
     data = nsw_matchitSavedData$psm1
   )
@@ -72,6 +87,21 @@ psmCoef1 <-
            cluster = nsw_matchitSavedData$psm1$subclass
   )
 
+
+# difference-in-difference ------------------------------------------------
+psmFit2 <-
+  lm(
+    I(re78 - re75) ~ treat + age + education + black + hispanic + married + nodegree,
+    weights = weights,
+    data = nsw_matchitSavedData$psm1
+  )
+
+## for cem and psm, we ideally want to cluster by subclass
+psmCoef2 <-
+  coeftest(psmFit2, 
+           vcov. = vcovCL,
+           cluster = nsw_matchitSavedData$psm1$subclass
+  )
 
 
 ## What SE to use? When in doubt use cluster SE except for exact matching 
@@ -94,10 +124,12 @@ stargazer(
   exactFit1,
   cemFit1,
   psmFit1,
+  psmFit2,
   se = 
     list(
       exactCoef1[,2], 
       cemCoef1[,2],
-      psmCoef1[, 2]),
+      psmCoef1[, 2],
+      psmCoef2[,2]),
   type = 'text')
 

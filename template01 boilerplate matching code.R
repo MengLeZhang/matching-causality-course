@@ -12,7 +12,6 @@ myData <-
 ## setup: initiate list of matches and saved matched data
 ## put this section at the start of your script (once only)
 ## note: if you change the name of the matchitList and matchitSavedData, change it elsewhere too
-  
 
 matchitList <-
   list()
