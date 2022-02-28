@@ -1,9 +1,33 @@
-# Matching Cheat Sheet
+# Matching Cheat Sheet/ Page
 Author: Meng Le Zhang
+__Versions__ This is living document that I keep updated. Point out my mistakes, add more stuff.
+Version:
+0.1. For course 3/3/2022
 
-# Overview
 
-A quick reference to matching and what it is.
+<!-- TOC -->
+
+- [Matching Cheat Sheet/ Page](#matching-cheat-sheet-page)
+- [Basics](#basics)
+  - [Common maths notation](#common-maths-notation)
+  - [Basic stats lingo](#basic-stats-lingo)
+  - [Potential outcomes framework (Estimands)](#potential-outcomes-framework-estimands)
+- [The design: Choosing what $X$ to match on](#the-design-choosing-what-x-to-match-on)
+- [Matching (the stats part of an estimator)](#matching-the-stats-part-of-an-estimator)
+  - [Steps for matching](#steps-for-matching)
+  - [Matching terms](#matching-terms)
+  - [How do we do the matching (method)?](#how-do-we-do-the-matching-method)
+  - [How do we measure closeness (distance)?](#how-do-we-measure-closeness-distance)
+  - [Misc Matching options](#misc-matching-options)
+  - [Coarsened exact matching](#coarsened-exact-matching)
+- [Misc. R stuff](#misc-r-stuff)
+- [Resources](#resources)
+  - [Much better resources for matching and the MatchIt package](#much-better-resources-for-matching-and-the-matchit-package)
+  - [FAQS:](#faqs)
+    - [What if I have more than one treatment group/ continuous treatment?](#what-if-i-have-more-than-one-treatment-group-continuous-treatment)
+
+<!-- /TOC -->
+
 
 # Basics
 
@@ -14,7 +38,7 @@ A quick reference to matching and what it is.
 - $E(Y|X = x)$. The expected value (i.e. mean) of $Y$ when $X$ takes a certain value $x$. Example: $E(Y|X=1)$ is the expected value of $Y$ when $X$ is 1.
 
 
-# Precursor
+## Basic stats lingo
 
 ![](assets/markdown-img-paste-20220221142618161.png)
 Example: Estimand (R) versus Estimate (L). We don't know what method (i.e. estimator) the artist used to recreate the picture on the right.
@@ -39,7 +63,7 @@ Example: The average age in the UK is the __estimand__. Taking the average age o
 
 
 
-# Potential outcomes framework (Estimands)
+## Potential outcomes framework (Estimands)
 
 
 |           | Sex |   | Outcome (if treated) | Outcome (if not treated) | Is actually treated? | Outcome (in real life) |
@@ -65,7 +89,7 @@ This is identifical to differencing the average of the two outcome cols.
 
 - __Intention to Treat (ITT) effect__. The average difference in outcomes for those who were _assigned_ to receive the treatment (regardless of whether they actually were treated). If everyone who was assigned also got the treatment then the __ITT = ATT__. Perfect compliance rarely happens.
 
-## The design: Choosing what $X$ to match on
+# The design: Choosing what $X$ to match on
 
 > Whether the context be policy analysis or any other form of empirical research, the logic of inference is summarized by the relationship:
 >   _assumption + data => conclusions_
@@ -163,13 +187,10 @@ __Ratio__ `ratio = .`: For each treatment case, what is the maximum number of ma
 More options and full explanations: `?matchit`
 
 
-## Coarsened exact matching
-
-
 __subclass, substrata__ Group of cases that were matched to each other. For example, Isabella is matched to Amelia and Mia in the control group based sex. These three cases form their own subclass/ substrata.
 
 
-## Misc. R stuff
+# Misc. R stuff
 
 __list__: R object that literally a collection of other R objects. For example, item one can be a dataframe, item two can be a vector, item three can be an image file and so forth.
 
@@ -188,6 +209,9 @@ thisList$objName ## what we saved
 
 ````
 
+# Resources
+
+
 ## Much better resources for matching and the MatchIt package
 
 
@@ -205,10 +229,3 @@ Excellent reviews:
 ### What if I have more than one treatment group/ continuous treatment?
 Set up multiple comparisons of the ATT for each treatment group. Example: calculate ATT for treatment group 1 vs 2, group 1 vs 3 so forth. For each comparison, define the target treatment group and target 'control' then match. For continuous treatments, you can band the treatment variable and treat as if it was a muliple treatment group situtation.
 Check the literature for much more complicated way to do this.
-
-
-
-### Versions
-This is living document that I keep updated. Point out my mistakes, add more stuff.
-Version:
-0.1.

@@ -1,5 +1,6 @@
 # What is the National Supported Work (NSW) Demonstration?
 
+
 The NSW was a US program conducted between 1975 and 1979. It provided high structured work experience for individuals who faced economic and social problems prior to enrollment in the program. Some participants experience on the job training lasting between nine months and a year. NSW was aimed at four groups of people with severe employment disadvantages:
 - Female AFDC recipients (Aid to Families with Dependent Children; available to families with low or no income) (25% of participants)
 - ex-drug addicts (21%)
@@ -19,7 +20,7 @@ The program was run in fifteen sites across the US including Atlanta, Chicago, H
 
 Enrollment took place between April 1975 and July 1977. Participants applied to be in the program (due to walk-in or referrals).
 
-Data from the NSW comes from the official evaluation program. The program costs $9,100 per AFDC participant and $6,800 per participant for the other group.
+Data from the NSW comes from the official evaluation program. The program costs 9,100 USD per AFDC participant and 6,800 USD per participant for the other group.
 
 The data used for this course on a subset of participants who were:
 - male (i.e. no AFDC group)
@@ -29,9 +30,8 @@ The data used for this course on a subset of participants who were:
 
 __Population Survey of Income Dynamics (PSID)__: A random US population survey of household heads. This is where data from the control group comes from. Only male respondents are in this subset.
 
-Data source:
-
-Hosted by Dehejia:
+## Resources
+Data hosted by Dehejia:
 https://users.nber.org/~rdehejia/data/.nswdata2.html
 
 References:

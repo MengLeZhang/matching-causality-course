@@ -22,12 +22,12 @@ Do not use the file:
 
 Save them and have a think about which treatment effects are the most credible. Ask yourself why:
 - [ ] DO NOT USE THE SIZE OR DIRECTION OF THE TREATMENT EFFECT -- THIS IS BAD SCIENCE
-- [ ] read docs/data-readme
+- [ ] read docs/data-readme (https://menglezhang.github.io/matching-causality-course/data-readme.html)
 - [ ] check difference in the pre-treatment outcome re75
 - [ ] check balance statistics 
 - [ ] use any other methodological knowledge you may have 
 
 The first two points are so important that I'll repeat them twice.
-- [ ] DO NOT USE THE SIZE OR DIRECTION OF THE TREATMENT EFFECT -- REPEAT THIS
-- [ ] read docs/data-readme
+- [ ] DO NOT USE THE SIZE OR DIRECTION OF THE TREATMENT EFFECT
+- [ ] read docs/data-readme (https://menglezhang.github.io/matching-causality-course/data-readme.html)
 
