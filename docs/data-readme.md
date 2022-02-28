@@ -21,11 +21,23 @@ Enrollment took place between April 1975 and July 1977. Participants applied to 
 
 Data from the NSW comes from the official evaluation program. The program costs $9,100 per AFDC participant and $6,800 per participant for the other group.
 
-The data used for this course on a subset of __male participants__ (i.e. no AFDC group) who were not lost to .
+The data used for this course on a subset of participants who were:
+- male (i.e. no AFDC group)
+- not lost to attrition
+- enrolled after December 1975
+- no longer participating by 1978 (e.g. finished or dropouted out)
 
 __Population Survey of Income Dynamics (PSID)__: A random US population survey of household heads. This is where data from the control group comes from. Only male respondents are in this subset.
 
+Data source:
+
+Hosted by Dehejia:
+https://users.nber.org/~rdehejia/data/.nswdata2.html
+
 References:
+
+Dehejia, Rajeev H, and Sadek Wahba. ‘Causal Effects in Nonexperimental Studies: Reevaluating the Evaluation of Training Programs’. Journal of the American Statistical Association 94, no. 448 (1999): 11.
+
 
 Lalonde, Robert J. ‘Evaluating the Econometric Evaluations of Training Programs with Experimental Data’. American Economic Review 76, no. 4 (1986): 604–20. https://doi.org/10.1017/CBO9781107415324.004.
 
