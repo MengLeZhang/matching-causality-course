@@ -58,12 +58,17 @@ lm(re75 ~ treat + subclass, exactData)
 ## To get the proper ATT you need to weight
 lm(re75 ~ treat, exactData, weights = weights) 
 
+## Shows the estimate in 01 is just an unweighted version 
+lm(re75 ~ treat + subclass, exactData) 
+lm(re75 ~ treat + subclass, exactData, weights = weights) 
+
+
 ## Note that once reweighted the sample is balanced with respect to married and nodegree
 ##  adding these variables in no logner affect results
-lm(re75 ~ treat + subclass, exactData, weights = weights) 
+## i.e. doubly robust
 lm(re75 ~ treat + married + nodegree, exactData, weights = weights) 
 lm(re75 ~ treat + nodegree, exactData, weights = weights) 
-
+lm(re75 ~ treat + nodegree*married, exactData, weights = weights) 
 
 
 # exact matching with continuous variables --------------------------------
@@ -81,8 +86,18 @@ exactMatch_tooMuch %>% summary
 match.data(exactMatch_tooMuch) %>% summary
 ## there's 461+ subclass
 
+## Still doubly robust 
+exactData_tooMuch <- exactMatch_tooMuch %>% match.data()
+
+lm(re75 ~ treat, exactData_tooMuch, weights = weights) 
+lm(re75 ~ treat + nodegree*married, exactData_tooMuch, weights = weights) 
+lm(re75 ~ treat + age, exactData_tooMuch, weights = weights) 
+lm(re75 ~ treat + age + I(age^2), exactData_tooMuch, weights = weights) 
+lm(re75 ~ treat + age + I(age^2 * education), exactData_tooMuch, weights = weights) 
+# ^ treat has the same results (minus rounding) no matter model functional form
+
 # coarsened exact matching (CEM) ------------------------------------------
-## idea = exact match where we can and imprecise when we can't
+
 cemMatch <- 
   matchit(
     treat ~ married + nodegree + age + education,
@@ -136,5 +151,15 @@ lm(re75 ~ treat, psmLogitData, weights = weights)
 ## if balance is achieved then adding the matching covars should not really change the results
 lm(re75 ~ treat + married + nodegree + age + education, psmLogitData, weights = weights)
 lm(re75 ~ treat + married*(nodegree + age + education), psmLogitData, weights = weights)
-## could be better could be worse
+lm(re75 ~ treat + married + nodegree + age + I(age^2) + education + I(education^2), psmLogitData, weights = weights)
+## could be better, could be worse; see below
 
+# unmatched data ----------------------------------------------------------
+## Do estimates fluctuate for the non-processed raw data? 
+lm(re75 ~ treat + married + nodegree + age + education, myData)
+lm(re75 ~ treat + married*(nodegree + age + education), myData)
+lm(re75 ~ treat + married + nodegree + age + I(age^2) + education + I(education^2), myData)
+
+## Context 
+lm(re75 ~ treat + married + nodegree + age + education, myData) %>% summary
+## Estimate fluctuate 1SE simply based on our choice of functional form

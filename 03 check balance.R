@@ -54,7 +54,7 @@ checkThisMatchit %>%
 ##  love plots to summarise everythin
 checkThisMatchit %>%
   summary %>%
-  plot(var.order = 'unmatched')
+  plot(var.order = 'unmatched', abs = F)
 
 
 ## plots 
@@ -144,7 +144,7 @@ ggpairs(
       married = married %>% as.factor,
       nodegree = nodegree %>% as.factor
       ) %>%
-    select(treat, married, nodegree, age, education),
+    select(treat,  age, education),
   ggplot2::aes(colour = treat) # <- make sure your treatment indicator is a character/factor
 )
 

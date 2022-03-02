@@ -35,9 +35,7 @@ nsw_noOut <-
     subclass = paste0(married, nodegree) %>% as.character()
   )
 
-##  For each subgroup we cal 
-
-## Check out the sample size in t
+## Check out the sample size in each subclass
 nsw_noOut %>%
   group_by(
     subclass, married, nodegree, treat
@@ -49,15 +47,46 @@ nsw_noOut %>%
 ## For each subclass we can calculate the difference in mean ....
 ## say of earnings in re75
 
-lm(re75 ~ treat, nsw_noOut, subset = subclass == '00')
-lm(re75 ~ treat, nsw_noOut, subset = subclass == '01')
-lm(re75 ~ treat, nsw_noOut, subset = subclass == '10')
-lm(re75 ~ treat, nsw_noOut, subset = subclass == '11')
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '00') # -13218
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '01') # -6589
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '10') # -16303
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '11') # -10566
 
 ## so forth.... then 
 
-## To get an overall average difference in mean per subclass 
+## Work out the ATT by hand:
+## Step 1: Get each subclass effect 
+## Step 2: Get the weighted average of the effect (subclass effect * prop(in subclass| treated))  
+
+## Step 1.
+## For each subclass we can calculate the difference in mean ....
+## say of earnings in re75
+
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '00') # -13218
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '01') # -6589
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '10') # -16303
+lm(re75 ~ treat, nsw_noOut, subset = subclass == '11') # -10566
+
+
+## Step 2. 
+## Find the proportion of people in each subclass (treatment group only)
+nsw_noOut$treat %>% table
+nsw_noOut %>%
+  filter(treat == 1) %>%
+  group_by(
+    subclass
+  ) %>%
+  summarise(
+    prop = n() / 297
+  )
+
+(-13218 * 0.226) + (-6589 * 0.606) + (-16303 * 0.0438) + (-10566 *0.125)
+## approx -9015 
+
+
+## Warning: Just wacking the subclasses into a model isn't wrong per se -- 
+##  it just doesn't give you the ATT
 lm(re75 ~ treat + subclass, nsw_noOut) 
-## the weight will be off here though! 
+## the weight will be off here: this is more like the ATE
 
 ## Clearly this is a pain; let's use a proper matching package.

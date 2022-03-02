@@ -1,9 +1,12 @@
 # boilerplate template for checking ---------------------------------------
 
-
+library(dplyr)
+library(MatchIt)
+library(GGally)
+library(ggplot2)
 # input -------------------------------------------------------------------
 ## list of saved matchit models and their data 
-## example: run template02 and get the models
+## example: run template01b and get the models
 checkMatchit <- 
   nsw_matchitList #example
 
@@ -25,36 +28,26 @@ checkMatchit %>% lapply(summary)
 
 
 ## 2. Output visuals
-
-checkThisMatchit %>%
-  plot(
-    type = 
-      # 'qq'
-      # 'ecdf'
-      # 'density'
-      # 'jitter'
-      # 'histogram'
-  )
+## Example
+checkThisMatchit <- checkMatchit$psm1
 
 checkThisMatchit %>%
   summary %>%
   plot(
     abs = F
+  )
+
+checkThisMatchit %>%
+    plot(
+      type = 
+        # 'qq'
+        # 'ecdf'
+        # 'density'
+        # 'jitter'
+        # 'histogram'
     )
 
 # 3. pairwise plots -------------------------------------------------------
 
-## No boilerplate here (unless you want to write your own for loop)
-
-ggpairs(
-  data = 
-    checkMatchitData$exact %>% 
-    mutate(
-      treat = treat %>% as.factor, 
-      married = married %>% as.factor,
-      nodegree = nodegree %>% as.factor
-    ) %>%
-    select(treat, married, nodegree, age, education),
-  ggplot2::aes(colour = treat) # <- make sure your treatment indicator is a character/factor
-)
-
+## No boilerplate here 
+## Check out 03 for example usage of GGally
