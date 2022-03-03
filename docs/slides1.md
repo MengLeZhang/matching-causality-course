@@ -57,9 +57,7 @@ output:
 2. 15 min task / break
 3. Explaining matching using MatchIt (30 min)
 4. 15 min task / break
-5. Matching using MatchIt in R (30 min)
-6. 30 min exercise: NSW data
-7. Wrap up (30 min)
+5. Wrap up (30 min)
 
 Confused? Lost track? Check out the cheatsheet
 
