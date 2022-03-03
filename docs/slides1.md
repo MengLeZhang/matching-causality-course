@@ -31,10 +31,6 @@ output:
 - understand what matching is about
 - what to do it using R
 
-## Example: Causality lingo
-
-![](assets/markdown-img-paste-20220301122458207.png)
-
 ## Example: Matching jargon
 
 <small> "In addition, the estimate of interest, the __average treatment effect on the treated (ATT)__..."</small>
