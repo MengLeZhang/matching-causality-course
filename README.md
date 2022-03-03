@@ -10,6 +10,11 @@ What stuff is:
 - boilerplate code for copy+pasting+tweaking begins with the name template (template01 etc)
 - data used for the course begins
 
+
+![](assets/markdown-img-paste-20220303072151789.png)
+Download as zip from github
+
+
 # Exercise
 Calculate several estimates for the treatment effect from the NSW using the data in the /data folder:
 - makefile01 NSW+controls no outcome.rds
